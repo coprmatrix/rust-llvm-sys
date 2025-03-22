@@ -2,11 +2,12 @@
   <service name="rust2rpm" mode="manual">
     <param name="pkgid">llvm-sys</param>
   </service>
-  <service name="run" mode="manual">
-    <param name="command">
-tmp="$(mktemp)" ; 
-( echo "BuildRequires: llvm-devel"; cat rust-llvm-sys.spec ) > "${tmp}" ; 
-cp "${tmp}" "${outdir:-.}/rust-llvm-sys.spec"
+  <service name="perl_regex" mode="manual">
+    <param name="regex">
+if ($. == 1){
+  $_ = "BuildRequires: llvm-devel cmake(zlib) cmake(libxml2)\n${_}"
+}
     </param> 
+    <param name="file">rust-llvm-sys.spec</param>
   </service>
 </services>
