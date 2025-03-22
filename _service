@@ -2,4 +2,11 @@
   <service name="rust2rpm" mode="manual">
     <param name="pkgid">llvm-sys</param>
   </service>
+  <service name="run" mode="manual">
+    <param name="command">
+tmp="$(mktemp)" ; 
+( echo "BuildRequires: llvm-devel"; cat rust-llvm-sys.spec ) > "${tmp}" ; 
+cp "${tmp}" "${outdir:-.}/rust-llvm-sys.spec"
+    </param> 
+  </service>
 </services>
